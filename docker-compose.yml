@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   composer:
+    network_mode: "none"
     image: composer:1.6
     volumes:
       - .:/app
@@ -9,6 +10,7 @@ services:
     command: composer install --ignore-platform-reqs
 
   php:
+    network_mode: "none"
     build: ./docker/php
     image: mrivera/mrivera/php-jwtverify:7.2
     volumes:
