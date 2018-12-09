@@ -30,12 +30,11 @@ class JWTVerifier
      */
     protected $jwsVerifier;
 
-    public function __construct($jwkJson)
+    public function __construct()
     {
         $this->setAlgorithm();
         $this->setAlgorithmManager();
         $this->setJWSVerifier();
-        $this->setJWKSet($jwkJson);
     }
 
     public function setAlgorithm()
@@ -46,16 +45,19 @@ class JWTVerifier
     public function setAlgorithmManager()
     {
         $this->algorithmManager = AlgorithmManager::create([$this->algorithm]);
+        return $this;
     }
 
     public function setJWSVerifier()
     {
         $this->jwsVerifier = new JWSVerifier($this->algorithmManager);
+        return $this;
     }
 
     public function setJWKSet($jwkJson)
     {
         $this->jwkSet = JWKSet::createFromJson($jwkJson);
+        return $this;
     }
 
     public function verify($jwt)

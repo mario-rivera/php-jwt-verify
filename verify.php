@@ -11,7 +11,7 @@ use Jose\Component\Checker;
 $token = file_get_contents('token.sample.jwt');
 
 $jwtManager = new JWTManager();
-$jwtVerifier = new JWTVerifier(file_get_contents('oid_keys.sample.json'));
+$jwtVerifier = (new JWTVerifier())->setJWKSet(file_get_contents('oid_keys.sample.json'));
 
 $jws = $jwtManager->getJWS($token);
 
